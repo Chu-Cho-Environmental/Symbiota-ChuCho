@@ -131,4 +131,36 @@ else{
 const HTML_SPECIAL_CHARS_FLAGS = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
 
 if($LANG_TAG != 'en' && !in_array($LANG_TAG, $AVAILABLE_LANGS)) $LANG_TAG = 'en';
+
+//Login Wall
+$httpProtocolPrefix = isset($_SERVER['HTTPS']) ? 'https' : 'http';
+$url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+$urlParts = explode('?', $url);
+
+$end = $urlParts[0];
+$end = array_slice(explode('/', $end), -2);
+
+$queryString = $urlParts[1];
+parse_str($queryString, $queryArray);
+
+$userId = array_key_exists('userid', $_REQUEST) ? filter_var($_REQUEST['userid'], FILTER_SANITIZE_NUMBER_INT) : 0;
+
+$isSelf = 0;
+if(isset($SYMB_UID) && $SYMB_UID){
+	if(!$userId){
+		$userId = $SYMB_UID;
+	}
+	if($userId == $SYMB_UID){
+		$isSelf = 1;
+	}
+}
+
+if(!$isSelf) {
+	if (!($end[0] == 'profile' && $end[1] == 'index.php')) {
+		$refurl = array_key_exists('refurl', $queryArray) ? '?' . $queryArray['refurl'] : '';
+		header('Location: ' . $httpProtocolPrefix . '://' . $_SERVER['HTTP_HOST'] . $CLIENT_ROOT . '/profile/index.php' . $refurl);
+	}
+}
+
 ?>

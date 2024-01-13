@@ -194,12 +194,6 @@ include($SERVER_ROOT.'/includes/header.php');
 			</form>
 		</fieldset>
 		<div style="width:300px;text-align:center;margin:20px;">
-			<div style="font-weight:bold;">
-				<?php echo (isset($LANG['NO_ACCOUNT'])?$LANG['NO_ACCOUNT']:"Don't have an Account?"); ?>
-			</div>
-			<div style="">
-				<a href="newprofile.php?refurl=<?php echo $refUrl; ?>"><?php echo (isset($LANG['CREATE_ACCOUNT'])?$LANG['CREATE_ACCOUNT']:'Create an account'); ?></a>
-			</div>
 			<div style="font-weight:bold;margin-top:5px">
 				<?php echo (isset($LANG['REMEMBER_PWD'])?$LANG['REMEMBER_PWD']:"Can't Remember your password?"); ?>
 			</div>

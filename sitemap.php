@@ -138,6 +138,9 @@ $smManager = new SiteMapManager();
 								<a href="profile/usermanagement.php"><?php echo $LANG['USERPERM'];?></a>
 							</li>
 							<li>
+								<a href="profile/newprofile.php"><?php echo (isset($LANG['CREATE_ACCOUNT'])?$LANG['CREATE_ACCOUNT']:'Create an account'); ?></a>
+							</li
+							<li>
 								<a href="profile/usertaxonomymanager.php"><?php echo $LANG['TAXINTER'];?></a>
 							</li>
 							<li>
