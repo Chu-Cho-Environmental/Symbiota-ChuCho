@@ -1,5 +1,6 @@
 /config/dbconnection.php
 /config/symbini.php
+/docker/db-data
 /footer.php
 /header.php
 /leftmenu.php

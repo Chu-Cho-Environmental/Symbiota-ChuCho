@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - '8080:80'
+    volumes:
+      - ../:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php-fpm
+    stdin_open: true
+    tty: true
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: php.Dockerfile
+    ports:
+      - '9000:9000'
+    volumes:
+      - ../:/var/www/html
+      - ./php:/usr/local/etc/php
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal
+
+  db:
+    image: mariadb
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./db-data:/var/lib/mysql
+    user: mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: TestPassword1!
+      MARIADB_DATABASE: symdb
+      MARIADB_USER: symdb
+      MARIADB_PASSWORD: g}y!QYgjV)cH+_q)w{1>
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
